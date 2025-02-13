@@ -42,7 +42,7 @@ class DataProcessor:
                 timestamps.append(datetime.fromisoformat(msg['timestamp']))
         
         if user_msg_lengths:
-            metrics['avg_response_length'] = sum(user_msg_lengths) / len(user_msg_lengths)
+            metrics['avg_response_length'] = round(sum(user_msg_lengths) / len(user_msg_lengths), 1)
         
         if len(timestamps) > 1:
             timestamps.sort()
@@ -77,7 +77,8 @@ class DataProcessor:
             
             # Calculate averages
             summary[f'{activity.lower()}_metrics'] = {
-                key: np.mean(values) if values else 0
+                key: round(np.mean(values)) if key in ['total_messages', 'user_messages']
+                     else round(np.mean(values), 1) if values else 0
                 for key, values in activity_metrics.items()
                 if key != 'timestamps'
             }
@@ -121,8 +122,8 @@ class DataProcessor:
         
         # Calculate overall averages
         if history['overall_metrics']['avg_response_length']:
-            history['overall_metrics']['avg_response_length'] = np.mean(
-                history['overall_metrics']['avg_response_length']
+            history['overall_metrics']['avg_response_length'] = round(
+                np.mean(history['overall_metrics']['avg_response_length']), 1
             )
         else:
             history['overall_metrics']['avg_response_length'] = 0
@@ -147,8 +148,8 @@ class DataProcessor:
             'avg_response_length': [],
             'chapter_comparisons': {},
             'activity_distributions': {
-                'Reading': {'total_students': 0, 'avg_messages': 0},
-                'Problem': {'total_students': 0, 'avg_messages': 0}
+                'Reading': {'total_students': set(), 'total_messages': 0},
+                'Problem': {'total_students': set(), 'total_messages': 0}
             }
         }
         
@@ -173,20 +174,29 @@ class DataProcessor:
                         chapter_stats[activity_key]['avg_response_length']
                     )
                     
-                    stats['activity_distributions'][activity]['total_students'] += len(data)
-                    stats['activity_distributions'][activity]['avg_messages'] += sum(
+                    # Add student IDs to the set for this activity
+                    stats['activity_distributions'][activity]['total_students'].update(
+                        f.stem for f in (self.data_dir / f"{chapter}_{activity}/anon_students").glob("*.json")
+                    )
+                    # Add total messages for this activity
+                    stats['activity_distributions'][activity]['total_messages'] += sum(
                         len(d['interactions']) for d in data
                     )
         
-        # Calculate final averages
+        # Calculate final averages and convert sets to counts
         for activity in self.activities:
-            if stats['activity_distributions'][activity]['total_students'] > 0:
-                stats['activity_distributions'][activity]['avg_messages'] /= \
-                    stats['activity_distributions'][activity]['total_students']
+            unique_student_count = len(stats['activity_distributions'][activity]['total_students'])
+            total_messages = stats['activity_distributions'][activity]['total_messages']
+            
+            # Convert the set to count and calculate average
+            stats['activity_distributions'][activity] = {
+                'total_students': unique_student_count,
+                'avg_messages': round(total_messages / unique_student_count) if unique_student_count > 0 else 0
+            }
         
         if stats['avg_active_time']:
-            stats['avg_active_time'] = np.mean(stats['avg_active_time'])
+            stats['avg_active_time'] = round(np.mean(stats['avg_active_time']), 1)
         if stats['avg_response_length']:
-            stats['avg_response_length'] = np.mean(stats['avg_response_length'])
+            stats['avg_response_length'] = round(np.mean(stats['avg_response_length']), 1)
             
         return stats

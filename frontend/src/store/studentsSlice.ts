@@ -23,8 +23,15 @@ interface StudentHistory {
   };
 }
 
+interface StudentSummary {
+  id: string;
+  total_interactions: number;
+  total_active_time: number;
+  avg_response_length: number;
+}
+
 interface StudentsState {
-  list: string[];
+  list: StudentSummary[];
   selectedStudent: string | null;
   studentHistory: StudentHistory | null;
   loading: boolean;
@@ -42,7 +49,7 @@ const initialState: StudentsState = {
 export const fetchStudentsList = createAsyncThunk(
   'students/fetchList',
   async () => {
-    const response = await axios.get('http://localhost:8000/api/students');
+    const response = await axios.get<StudentSummary[]>('http://localhost:8000/api/students');
     return response.data;
   }
 );
@@ -69,7 +76,7 @@ const studentsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchStudentsList.fulfilled, (state, action: PayloadAction<string[]>) => {
+      .addCase(fetchStudentsList.fulfilled, (state, action: PayloadAction<StudentSummary[]>) => {
         state.loading = false;
         state.list = action.payload;
       })

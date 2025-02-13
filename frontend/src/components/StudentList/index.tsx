@@ -67,19 +67,19 @@ const StudentList: React.FC = () => {
             <TableBody>
               {students
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((studentId) => (
+                .map((student) => (
                   <TableRow
                     hover
-                    onClick={() => handleRowClick(studentId)}
-                    key={studentId}
+                    onClick={() => handleRowClick(student.id)}
+                    key={student.id}
                     sx={{ cursor: 'pointer' }}
                   >
                     <TableCell component="th" scope="row">
-                      {studentId}
+                      {student.id}
                     </TableCell>
-                    <TableCell align="right">-</TableCell>
-                    <TableCell align="right">-</TableCell>
-                    <TableCell align="right">-</TableCell>
+                    <TableCell align="right">{student.total_interactions}</TableCell>
+                    <TableCell align="right">{student.total_active_time}</TableCell>
+                    <TableCell align="right">{student.avg_response_length}</TableCell>
                   </TableRow>
                 ))}
             </TableBody>

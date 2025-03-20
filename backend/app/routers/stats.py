@@ -38,3 +38,10 @@ async def get_activity_comparison(
         'activity_distributions': stats['activity_distributions'],
         'chapter_comparisons': stats['chapter_comparisons']
     }
+
+@router.get("/weekly")
+async def get_weekly_stats(
+    data_processor: DataProcessor = Depends(get_data_processor)
+) -> Dict[str, Any]:
+    """Get activity statistics grouped by week."""
+    return data_processor.get_weekly_statistics()

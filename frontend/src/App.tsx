@@ -7,11 +7,13 @@ import {
   Dashboard as DashboardIcon,
   People as PeopleIcon,
   Assessment as AssessmentIcon,
+  Timeline as TimelineIcon,
 } from '@mui/icons-material';
 import Dashboard from './components/Dashboard';
 import StudentList from './components/StudentList';
 import StudentDetail from './components/StudentDetail';
 import ChapterAnalysis from './components/ChapterAnalysis';
+import WeeklyAnalysis from './components/WeeklyAnalysis';
 
 const drawerWidth = 240;
 
@@ -45,6 +47,7 @@ const App: React.FC = () => {
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
     { text: 'Students', icon: <PeopleIcon />, path: '/students' },
     { text: 'Chapter Analysis', icon: <AssessmentIcon />, path: '/chapters' },
+    { text: 'Weekly Analysis', icon: <TimelineIcon />, path: '/weekly' },
   ];
 
   return (
@@ -96,6 +99,7 @@ const App: React.FC = () => {
           <Route path="/students" element={<StudentList />} />
           <Route path="/students/:id" element={<StudentDetail />} />
           <Route path="/chapters" element={<ChapterAnalysis />} />
+          <Route path="/weekly" element={<WeeklyAnalysis />} />
         </Routes>
       </Main>
     </Box>

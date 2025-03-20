@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 from collections import defaultdict
@@ -10,7 +10,7 @@ import numpy as np
 class DataProcessor:
     def __init__(self, data_dir: str):
         self.data_dir = Path(data_dir)
-        self.chapters = ["Chapter3", "Chapter4", "Chapter10"]
+        self.chapters = ["Chapter2","Chapter3", "Chapter4", "Chapter10", "Chapter8", "Chapter9", "Chapter6", "Chapter5", "Chapter11", "Chapter12", "Chapter13", "Chapter14"]
         self.activities = ["Reading", "Problem"]
         
     def load_student_data(self, chapter: str, activity: str) -> List[Dict[str, Any]]:
@@ -200,3 +200,90 @@ class DataProcessor:
             stats['avg_response_length'] = round(np.mean(stats['avg_response_length']), 1)
             
         return stats
+    
+    def get_weekly_statistics(self) -> Dict[str, Any]:
+        """Group interaction statistics by week across all chapters and activities."""
+        # Collect all student interactions
+        all_interactions = []
+        
+        for chapter in self.chapters:
+            for activity in self.activities:
+                path = self.data_dir / f"{chapter}_{activity}/anon_students"
+                if not path.exists():
+                    continue
+                    
+                for file in path.glob("*.json"):
+                    with open(file) as f:
+                        student_data = json.load(f)
+                        student_id = file.stem
+                        
+                        for interaction in student_data['interactions']:
+                            if 'timestamp' not in interaction:
+                                continue
+                                
+                            timestamp = datetime.fromisoformat(interaction['timestamp'])
+                            all_interactions.append({
+                                'student_id': student_id,
+                                'chapter': chapter,
+                                'activity': activity,
+                                'timestamp': timestamp,
+                                'role': interaction['role'],
+                                'content_length': len(interaction['content']),
+                            })
+        
+        if not all_interactions:
+            return {'weeks': []}
+            
+        # Convert to DataFrame for easier manipulation
+        df = pd.DataFrame(all_interactions)
+        
+        # Add week information
+        df['week'] = df['timestamp'].apply(
+            lambda x: f"Week {(x.isocalendar()[1])}"
+        )
+        df['year'] = df['timestamp'].dt.year
+        df['year_week'] = df['timestamp'].apply(
+            lambda x: f"{x.year}-W{x.isocalendar()[1]:02d}"
+        )
+        
+        # Sort by year and week
+        unique_year_weeks = sorted(df['year_week'].unique())
+        
+        # Calculate weekly stats
+        weekly_stats = []
+        for year_week in unique_year_weeks:
+            year, week_num = year_week.split('-')
+            week_df = df[df['year_week'] == year_week]
+            
+            # Skip weeks with very few interactions
+            if len(week_df) < 10:
+                continue
+                
+            # Get user messages only
+            user_msgs = week_df[week_df['role'] == 'user']
+            
+            stats = {
+                'week': week_num,
+                'year': year,
+                'display_week': f"{year} {week_num.replace('W', 'Week ')}",
+                'total_interactions': len(week_df),
+                'user_messages': len(user_msgs),
+                'unique_students': week_df['student_id'].nunique(),
+                'reading_interactions': len(week_df[week_df['activity'] == 'Reading']),
+                'problem_interactions': len(week_df[week_df['activity'] == 'Problem']),
+                'avg_message_length': round(user_msgs['content_length'].mean(), 1) if len(user_msgs) > 0 else 0,
+            }
+            
+            # Include chapter breakdown
+            stats['chapter_breakdown'] = {}
+            for chapter in week_df['chapter'].unique():
+                chapter_df = week_df[week_df['chapter'] == chapter]
+                stats['chapter_breakdown'][chapter] = {
+                    'total': len(chapter_df),
+                    'reading': len(chapter_df[chapter_df['activity'] == 'Reading']),
+                    'problem': len(chapter_df[chapter_df['activity'] == 'Problem']),
+                }
+            
+            weekly_stats.append(stats)
+        
+        return {'weeks': weekly_stats}

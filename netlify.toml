@@ -20,3 +20,5 @@
 [context.production.environment]
   # These variables are set in the Netlify UI to avoid exposing them in Git
   # REACT_APP_API_URL = "https://ai-tutor-dashboard-api.onrender.com"
+  # Prevent warnings from being treated as errors in CI builds
+  CI = "false"

@@ -26,7 +26,7 @@ import {
   BarChart,
   Bar,
   ComposedChart,
-  Area,
+  // Area is not used, so we're removing it to avoid the linting error
 } from 'recharts';
 import { AppDispatch, RootState } from '../../store';
 import { fetchWeeklyStats } from '../../store/statsSlice';

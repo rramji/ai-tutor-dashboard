@@ -9,9 +9,8 @@ router = APIRouter(
 )
 
 def get_data_processor():
-    # In production, you might want to use dependency injection
-    # and environment variables for the data directory
-    return DataProcessor("../../")
+    # Use the default data directory path in the repository
+    return DataProcessor()
 
 @router.get("/overview")
 async def get_overview_stats(

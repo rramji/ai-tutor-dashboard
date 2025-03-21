@@ -1,5 +1,10 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 from .routers import stats, students
 
@@ -9,10 +14,22 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Get environment-specific CORS settings
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+if ENVIRONMENT == "production":
+    # In production, only allow requests from the Netlify frontend
+    ALLOWED_ORIGINS = [
+        "https://ai-tutor-dashboard-demo.netlify.app",
+        "https://www.ai-tutor-dashboard-demo.netlify.app"
+    ]
+else:
+    # In development, allow all origins
+    ALLOWED_ORIGINS = ["*"]
+
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

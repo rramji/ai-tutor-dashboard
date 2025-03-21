@@ -8,8 +8,15 @@ import pandas as pd
 import numpy as np
 
 class DataProcessor:
-    def __init__(self, data_dir: str):
-        self.data_dir = Path(data_dir)
+    def __init__(self, data_dir: str | None = None):
+        # If no data directory is provided, use the repository data directory
+        if data_dir is None:
+            # Get the app directory (two levels up from this file)
+            app_dir = Path(__file__).parent.parent.parent.parent
+            self.data_dir = app_dir / "data" / "chapters"
+        else:
+            self.data_dir = Path(data_dir)
+            
         self.chapters = ["Chapter2","Chapter3", "Chapter4", "Chapter10", "Chapter8", "Chapter9", "Chapter6", "Chapter5", "Chapter11", "Chapter12", "Chapter13", "Chapter14"]
         self.activities = ["Reading", "Problem"]
         

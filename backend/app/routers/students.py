@@ -9,7 +9,7 @@ router = APIRouter(
 )
 
 def get_data_processor():
-    return DataProcessor("../../")
+    return DataProcessor()
 
 @router.get("")
 async def get_all_students(

@@ -1,0 +1,22 @@
+# Netlify configuration file
+
+[build]
+  # Directory where the build command runs
+  base = "frontend"
+  
+  # Build command
+  command = "npm run build"
+  
+  # Directory with the built files for serving
+  publish = "build"
+
+# Redirect all routes to index.html for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Set environment variables based on context
+[context.production.environment]
+  # These variables are set in the Netlify UI to avoid exposing them in Git
+  # REACT_APP_API_URL = "https://ai-tutor-dashboard-api.onrender.com"

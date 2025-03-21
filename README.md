@@ -1,5 +1,104 @@
 # AI Tutor Dashboard
 
+A dashboard application for analyzing student interactions with an AI tutor.
+
+## Features
+
+- Student interaction analysis
+- Chapter-by-chapter statistics
+- Weekly activity tracking
+- Detailed student profiles
+- Reading vs. Problem solving comparison
+
+## Structure
+
+This repository is organized as follows:
+
+- `/frontend` - React frontend application
+- `/backend` - FastAPI backend service
+- `/data` - Student interaction data
+- `/scripts` - Utility scripts for setup and maintenance
+
+## Setup
+
+### Prerequisites
+
+- Node.js 16+
+- Python 3.8+
+- Student data files (either in parent directory or already set up)
+
+### Initial Setup
+
+1. Clone this repository
+2. Set up the data directory:
+
+```bash
+# Make the setup script executable
+chmod +x scripts/setup_data.sh
+
+# Run the setup script to copy data
+./scripts/setup_data.sh
+```
+
+3. Install backend dependencies:
+
+```bash
+cd backend
+pip install -r requirements.txt
+```
+
+4. Install frontend dependencies:
+
+```bash
+cd frontend
+npm install
+```
+
+### Running Locally
+
+1. Start the backend server:
+
+```bash
+cd backend
+uvicorn app.main:app --reload
+```
+
+2. Start the frontend development server:
+
+```bash
+cd frontend
+npm start
+```
+
+3. Open http://localhost:3000 in your browser
+
+## Deployment
+
+### Backend (Render)
+
+1. Create a new Web Service on Render
+2. Connect to this GitHub repository
+3. Configure the service:
+   - Build Command: `pip install -r backend/requirements.txt`
+   - Start Command: `cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+   - Environment Variables:
+     - `ENVIRONMENT=production`
+
+### Frontend (Netlify)
+
+1. Create a new site on Netlify
+2. Connect to this GitHub repository
+3. Configure the build settings:
+   - Base directory: `frontend`
+   - Build command: `npm run build`
+   - Publish directory: `frontend/build`
+   - Environment Variables:
+     - `REACT_APP_API_URL=https://your-render-backend-url.onrender.com`
+
+## License
+
+MIT
+
 An interactive dashboard for visualizing student interaction and engagement data with an AI tutor. This application provides insights into student behavior, engagement patterns, and AI tutor performance across different chapters and activities.
 
 ## Features

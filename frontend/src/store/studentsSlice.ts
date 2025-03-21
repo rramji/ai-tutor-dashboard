@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import API_ENDPOINTS from '../config/api';
 
 interface StudentMetrics {
   total_messages: number;
@@ -49,7 +50,7 @@ const initialState: StudentsState = {
 export const fetchStudentsList = createAsyncThunk(
   'students/fetchList',
   async () => {
-    const response = await axios.get<StudentSummary[]>('http://localhost:8000/api/students');
+    const response = await axios.get<StudentSummary[]>(API_ENDPOINTS.STUDENTS);
     return response.data;
   }
 );
@@ -57,7 +58,7 @@ export const fetchStudentsList = createAsyncThunk(
 export const fetchStudentHistory = createAsyncThunk(
   'students/fetchHistory',
   async (studentId: string) => {
-    const response = await axios.get(`http://localhost:8000/api/students/${studentId}`);
+    const response = await axios.get(API_ENDPOINTS.STUDENT_DETAILS(studentId));
     return response.data;
   }
 );

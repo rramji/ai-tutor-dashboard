@@ -1,0 +1,45 @@
+{
+  "student_id": "d14783cfc82965fac392db90977302f82d0b34e88304ecb74497905e7418c02f",
+  "interactions": [
+    {
+      "content": "#### Section 1: Introduction\nOrganic molecules comprise 99% of what we mean when we say \"molecules.\"\nThe ability to speak a few words of Organic---as in a language---is thus\nprofoundly valuable when engineering organic nanostructures. One type of\norganic nanostructure is a **polymer**. Polymers are long chains of\natoms, usually made of carbon and a few other elements. This is the\nfirst chapter in a series of three on polymers. Chapter 5 treats\npolymers as examples of organic nanostructures (as in vaccine delivery\nparticles), Chapter 6 treats them as the components of solid objects (as\nin a piece of plexiglass), and Chapter 7 covers some examples of\nelectronic polymers. For a video primer to this chapter, visit\n\n>>>video(https://youtu.be/v_5SYuuiyK4)\n\nOrganic structures play a central role in nanoengineering. They comprise\nall polymers (including all photoresists used in nanofabrication),\nliquid crystals, molecular dyes, and many of the additives used during\nthe growth of nanocrystals and quantum dots. Moreover, polymers are\nfound widely in biology and comprise most biological macromolecules:\npolypeptides, polysaccharides, and nucleic acids. Almost every drug\nmolecule is an organic structure. Lucky for us, it is not necessary to\ntake an entire year of organic chemistry to learn what you need to know\nto be an effective nanoengineer. In fact, it's best not to even think of\nthis material as \"organic chemistry.\" Rather, you can think of it as\n*molecular structure and bonding*. It just so happens that most\nmolecules are made of carbon, hydrogen, nitrogen, oxygen and a few other\nsupporting players like sulfur and phosphorous, and thus considered\n\"organic.\"\n",
+      "role": "assistant",
+      "timestamp": "2025-02-21T04:23:42.977015"
+    },
+    {
+      "content": "Do you have any questions?",
+      "role": "assistant",
+      "timestamp": "2025-02-21T04:23:43.125628"
+    },
+    {
+      "content": "#### Section 1: Introduction\nOrganic molecules comprise 99% of what we mean when we say \"molecules.\"\nThe ability to speak a few words of Organic---as in a language---is thus\nprofoundly valuable when engineering organic nanostructures. One type of\norganic nanostructure is a **polymer**. Polymers are long chains of\natoms, usually made of carbon and a few other elements. This is the\nfirst chapter in a series of three on polymers. Chapter 5 treats\npolymers as examples of organic nanostructures (as in vaccine delivery\nparticles), Chapter 6 treats them as the components of solid objects (as\nin a piece of plexiglass), and Chapter 7 covers some examples of\nelectronic polymers. For a video primer to this chapter, visit\n\n>>>video(https://youtu.be/v_5SYuuiyK4)\n\nOrganic structures play a central role in nanoengineering. They comprise\nall polymers (including all photoresists used in nanofabrication),\nliquid crystals, molecular dyes, and many of the additives used during\nthe growth of nanocrystals and quantum dots. Moreover, polymers are\nfound widely in biology and comprise most biological macromolecules:\npolypeptides, polysaccharides, and nucleic acids. Almost every drug\nmolecule is an organic structure. Lucky for us, it is not necessary to\ntake an entire year of organic chemistry to learn what you need to know\nto be an effective nanoengineer. In fact, it's best not to even think of\nthis material as \"organic chemistry.\" Rather, you can think of it as\n*molecular structure and bonding*. It just so happens that most\nmolecules are made of carbon, hydrogen, nitrogen, oxygen and a few other\nsupporting players like sulfur and phosphorous, and thus considered\n\"organic.\"\n",
+      "role": "assistant",
+      "timestamp": "2025-02-21T04:55:30.593766"
+    },
+    {
+      "content": "Do you have any questions?",
+      "role": "assistant",
+      "timestamp": "2025-02-21T04:55:30.755255"
+    },
+    {
+      "content": "#### Section 2: Basic nomenclature\nJust like writing in a markup language like LaTeX or HTML, one can\ndescribe any molecule using a linear sequence of words, numbers, and\nbrackets. We will call this language *Organic*. It operates by the\nnomenclature established by the International Union of Pure and Applied\nChemistry (IUPAC). However, by describing chemical structures only in\nwords, the IUPAC name gets really long even for simple compounds. In\nfact, most chemists don't use IUPAC names for any but the most basic\nstructures (e.g., methane, ethane, propane, and butane). After all, it\nis almost always easier to just draw the structure. Moreover, most\ncomplicated structures have common names (like aspirin, ibuprofen, and\nPaxlovid). Thankfully, we don't need to know very many types of\nstructures in this course. Let's start with the linear hydrocarbons.\n\n### 5.2.1. Hydrocarbons: Counting to twelve in *Organic* Just like any\nother language, Organic has words corresponding to numbers of carbon\natoms. So, the words for the hydrocarbons of the general formula C\n$_{{n}}$ H $_{2{n}+2}$ as follows for $n$:\n\n1.  methane\n\n2.  ethane\n\n3.  propane\n\n4.  butane\n\n5.  pentane\n\n6.  hexane\n\n7.  heptane\n\n8.  octane\n\n9.  nonane\n\n10. decane\n\n11. undecane\n\n12. dodecane\n\nIf you need to count beyond 12, there is a pattern: tridecane,\ntetradecane, pentadecane, hexadecane, heptadecane, octadecane,\nnonadecane, and finally isocane for $n=20$.\n\nWhen converting the name of molecule to its structure, we usually leave\nout the carbon and hydrogen atoms. The reason is because they appear so\nregularly it would be tedious if we had to keep writing them. Instead,\nwe just draw the bonds---the atoms are implied. A carbon atom always has\nfour bonds. If the bonding partners are not shown, we assume that the\nremaining bonds are to hydrogen. Every vertex and terminus of the\nstructure signify a carbon atom. So, pentane, with the empirical formula\nC $_{5}$ H $_{12}$ , has the structure shown in Figure (5.1):\n\n(Figure 5.1) \n>>>image(pentane.png.0)\n\nVerify that you could draw the structures of any of the hydrocarbons\nwith $n=1-20$.\n",
+      "role": "assistant",
+      "timestamp": "2025-02-21T04:55:34.574657"
+    },
+    {
+      "content": "Do you have any questions?",
+      "role": "assistant",
+      "timestamp": "2025-02-21T04:55:34.718733"
+    },
+    {
+      "content": "#### Section 3: Functional groups\nMolecules with carbon-containing backbones are called **organic\nmolecules**. The most common elements beside carbon and hydrogen\nincorporated into organic molecules that occur naturally are oxygen and\nnitrogen, and to a lesser extent, phosphorous (e.g., found in the\nbackbone of DNA) and sulfur (e.g., found in the amino acids cysteine and\nmethionine). Unnatural organic structures can contain many other\nelements, such as chlorine (e.g., polyvinyl chloride) or bromine.\n\nThe site where non-carbon elements are incorporated into an organic\nmolecule is called a **functional group**. These groups are called\n*functional* because they often dictate the properties---thermodynamic\nproperties like melting and boiling point, along with chemical\nproperties like reactivity---of the molecule. It is not uncommon for\nmolecules to have many functional groups. The most common functional\ngroups you will encounter are shown in Figure (5.2), below.\n\n(Figure 5.2) \n>>>image(functional groups.png.0)\n\nR represents any group or part of a molecule, with the expectation that\nthe first atom of the R group is carbon. The C=O (double bond) subunit\nof acids, amides, and esters is called a **carbonyl**. All of the\nfunctional groups in this list are polar---capable of bonding by\ndipole-dipole and dipole-induced dipole forces---and alcohols, amines,\ncarboxylic acids, and amides are donors of hydrogen bonds. All five\nstructures are also capable of accepting hydrogen bonds through the lone\npairs on the oxygen atom of the carbonyl, or through the nitrogen atom\n(for amines).\n",
+      "role": "assistant",
+      "timestamp": "2025-02-21T04:55:43.282403"
+    },
+    {
+      "content": "Do you have any questions?",
+      "role": "assistant",
+      "timestamp": "2025-02-21T04:55:43.437431"
+    }
+  ]
+}

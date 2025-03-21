@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import API_ENDPOINTS from '../config/api';
 
 interface ChapterMetrics {
   total_students: number;
@@ -66,7 +67,7 @@ const initialState: StatsState = {
 export const fetchOverallStats = createAsyncThunk(
   'stats/fetchOverall',
   async () => {
-    const response = await axios.get('http://localhost:8000/api/stats/overview');
+    const response = await axios.get(API_ENDPOINTS.STATS_OVERVIEW);
     return response.data;
   }
 );
@@ -74,7 +75,7 @@ export const fetchOverallStats = createAsyncThunk(
 export const fetchWeeklyStats = createAsyncThunk(
   'stats/fetchWeekly',
   async () => {
-    const response = await axios.get('http://localhost:8000/api/stats/weekly');
+    const response = await axios.get(API_ENDPOINTS.STATS_WEEKLY);
     return response.data;
   }
 );
